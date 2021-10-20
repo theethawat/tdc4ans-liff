@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import axios from "axios";
-import config from "../config.json";
 
 export default function LoginComponent() {
   return (
