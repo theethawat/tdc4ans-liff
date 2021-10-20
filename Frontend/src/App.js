@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import liff from "@line/liff";
 import "./main.css";
 import "./tailwind.css";
+
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import Home from "./Containers/Home";
-import About from "./Containers/About";
+
+import { About, Home } from "./Containers";
 
 const theme = extendTheme({
   colors: {
@@ -26,8 +28,18 @@ const theme = extendTheme({
   },
 });
 
-function App() {
+const App = () => {
+  liff.init({
+    liffId: "1656554558-Yd6bX586",
+  });
+
   useEffect(() => {
+    const isLoginStatus = liff.isLoggedIn();
+    if (isLoginStatus === false) {
+      console.log("Must handle Login");
+      // handle Login
+      liff.login({ redirectUri: "https://liff.theduckcreator.in.th/redirect" });
+    }
     return () => {};
   }, []);
 
@@ -38,9 +50,9 @@ function App() {
         <title>The Duck Creator App </title>
       </Helmet>
       <ChakraProvider theme={theme}>
-        <Router>
-          <Navbar />
-          <div className='min-h-screen m-8'>
+        <Navbar />
+        <div className='min-h-screen m-8'>
+          <Router>
             <Switch>
               <Route path='/about'>
                 <About />
@@ -49,14 +61,14 @@ function App() {
               <Route path='/'>
                 <Home />
               </Route>
-            </Switch>
-          </div>
+            </Switch>{" "}
+          </Router>
+        </div>
 
-          <Footer />
-        </Router>
+        <Footer />
       </ChakraProvider>
     </div>
   );
-}
+};
 
 export default App;
