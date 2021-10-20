@@ -32,8 +32,7 @@ jobs:
             git pull origin 
             cd backend
             npm install
-            npm run build 
             pm2 stop tdc-liff
             pm2 del tdc-liff
-            pm2 start out --name=tdc-liff
+            pm2 start src/app.js --name=tdc-liff
             pm2 save

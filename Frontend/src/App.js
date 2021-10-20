@@ -38,7 +38,7 @@ const App = () => {
     if (isLoginStatus === false) {
       console.log("Must handle Login");
       // handle Login
-      liff.login({ redirectUri: "https://liff.theduckcreator.in.th/redirect" });
+      liff.login({ redirectUri: "https://liff.theduckcreator.in.th/" });
     }
     return () => {};
   }, []);
